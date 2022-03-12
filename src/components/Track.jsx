@@ -1,8 +1,14 @@
 import React from 'react';
 
-const Track = ({ track }) => {
+const Track = ({ track, setPage, setCurrentTrack }) => {
   return (
-    <li>
+    <li
+      onClick={(e) => {
+        setPage('trackInfo');
+        setCurrentTrack({ artist: track.artist.name, track: track.name });
+      }
+      }
+    >
       {track.name} by {track.artist.name}
     </li>
   )

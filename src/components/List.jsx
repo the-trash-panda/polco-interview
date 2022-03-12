@@ -1,13 +1,15 @@
 import React from 'react';
 import Track from './Track.jsx';
 
-const List = ({ topTracks }) => {
+const List = ({ topTracks, setPage, setCurrentTrack }) => {
   return (
     <ul>
       {topTracks.tracks.track.map((track) => {
         return (
           <Track
             track={track}
+            setPage={setPage}
+            setCurrentTrack={setCurrentTrack}
           />
         )
       })}
