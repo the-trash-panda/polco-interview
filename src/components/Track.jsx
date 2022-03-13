@@ -1,21 +1,19 @@
 import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faHeart } from '@fortawesome/free-solid-svg-icons'
+import axios from 'axios';
 
-library.add(faHeart)
-
-const Track = ({ track, setPage, setCurrentTrack }) => {
+const Track = ({ track, setPage, setCurrentTrack}) => {
 
   return (
     <li
       onClick={(e) => {
+        const params = {
+          artist: track.artist.name,
+          track: track.name
+        }
         setPage('trackInfo');
-        setCurrentTrack({ artist: track.artist.name, track: track.name });
-      }
-      }
+        setCurrentTrack(params);
+      }}
     >
-      <FontAwesomeIcon icon="fas fa-heart" color="black"/>
       {track.name} by {track.artist.name}
 
     </li>
