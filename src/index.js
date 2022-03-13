@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 // import trackInfo from './data/trackInfo.js';
 import List from './components/List.jsx';
 import TrackInfo from './components/TrackInfo.jsx';
+import Favorites from './components/Favorites.jsx';
 import axios from 'axios';
 
 
@@ -14,6 +15,7 @@ const App = () => {
   const [topTracks, setTopTracks] = useState([]);
   const [currentTrack, setCurrentTrack] = useState('');
   const [trackInfo, setTrackInfo] = useState('');
+  const [favorites, setFavorites] = useState([]);
 
 
   useEffect(() => {
@@ -35,12 +37,23 @@ const App = () => {
         .catch((err) => {console.error(err)})
   }, [currentTrack]);
 
+  useEffect(() => {
+    axios.get('/api/favorites')
+      .then((res) => {setFavorites(res.data.rows)})
+      .catch((err) => {console.error(err)})
+  }, [page === 'favorites'])
+
 
   return (
     <div>
-      <h2
-        onClick={(e) => {setPage('home')}}
-      >Billboard's Top 100 Hits</h2>
+      <div>
+        <h2
+          onClick={(e) => {setPage('home')}}
+        >Billboard's Top 100 Hits</h2>
+        <button onClick={(e) => {setPage('favorites')}}>
+          Favorites
+        </button>
+      </div>
       {page === 'home' ?
         <List
           topTracks={topTracks}
@@ -48,9 +61,13 @@ const App = () => {
           setPage={setPage}
           setCurrentTrack={setCurrentTrack}
         />
-        :
+        : page === 'trackInfo' ?
         <TrackInfo
           trackInfo={trackInfo}
+        />
+        :
+        <Favorites
+          favorites={favorites}
         />
       }
     </div>

@@ -4,6 +4,7 @@ const app = express();
 const PORT = 3000;
 const prune = require('json-prune');
 const axios = require('axios');
+const controller = require('../controller/favorites.js');
 
 const lastFM = require('../config.js');
 
@@ -47,6 +48,10 @@ app.get('/api/trackInfo', async (req, res) => {
   } catch (err) {
     res.send(err).status(404);
   }
+})
+
+app.get('/api/favorites', (req, res) => {
+  controller.getFavorites(req, res);
 })
 
 

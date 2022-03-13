@@ -9,8 +9,11 @@ CREATE DATABASE polco_interview;
 
 \c polco_interview;
 
+DROP TABLE IF EXISTS myfavorites;
+
 CREATE TABLE myfavorites (
   id SERIAL PRIMARY KEY,
   artist VARCHAR DEFAULT NULL,
-  track VARCHAR DEFAULT NULL
+  track VARCHAR DEFAULT NULL,
+  favorite BOOLEAN DEFAULT NULL
 );
