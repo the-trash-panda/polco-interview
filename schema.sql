@@ -17,3 +17,8 @@ CREATE TABLE myfavorites (
   track VARCHAR DEFAULT NULL,
   favorite BOOLEAN DEFAULT NULL
 );
+
+/* Example data set: */
+
+INSERT INTO myfavorites (artist, track, favorite) VALUES ('The Weeknd', 'Blinding Lights', true);
+INSERT INTO myfavorites (artist, track, favorite) VALUES ('Doja Cat', 'Woman', false);
