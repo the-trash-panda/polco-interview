@@ -13,7 +13,7 @@ const App = () => {
   const [page, setPage] = useState('home');
 
   const [topTracks, setTopTracks] = useState([]);
-  const [currentTrack, setCurrentTrack] = useState('');
+  const [currentTrack, setCurrentTrack] = useState({});
   const [trackInfo, setTrackInfo] = useState('');
   const [favorites, setFavorites] = useState([]);
 
@@ -22,35 +22,41 @@ const App = () => {
     axios.get('/api/topTracks')
       .then((res) => {setTopTracks(res.data.data)})
       .catch((err) => {console.error(err)})
+    axios.get('/api/favorites')
+      .then((res) => {setFavorites(res.data.rows)})
+      .catch((err) => {console.error(err)})
   }, []);
 
 
   useEffect(() => {
-    setTrackInfo('');
-  }, [page === 'home'])
-
-
-  useEffect(() => {
-    const params = currentTrack
-    axios.get('/api/trackInfo', {params})
+    axios.get('/api/trackInfo', {params: currentTrack})
         .then((res) => {setTrackInfo(res.data.data)})
         .catch((err) => {console.error(err)})
   }, [currentTrack]);
 
-  useEffect(() => {
+
+  const getFavorites = () => {
     axios.get('/api/favorites')
       .then((res) => {setFavorites(res.data.rows)})
       .catch((err) => {console.error(err)})
-  }, [page === 'favorites'])
+  };
 
 
   return (
     <div>
       <div>
         <h2
-          onClick={(e) => {setPage('home')}}
-        >Billboard's Top 100 Hits</h2>
-        <button onClick={(e) => {setPage('favorites')}}>
+          onClick={(e) => {
+            setPage('home');
+            setTrackInfo('');
+          }}
+        >LastFM's Top 50 Hits</h2>
+        <button
+          onClick={(e) => {
+            setPage('favorites');
+            getFavorites();
+          }}
+        >
           Favorites
         </button>
       </div>
@@ -64,10 +70,16 @@ const App = () => {
         : page === 'trackInfo' ?
         <TrackInfo
           trackInfo={trackInfo}
+          currentTrack={currentTrack}
+          favorites={favorites}
+          getFavorites={getFavorites}
         />
         :
         <Favorites
           favorites={favorites}
+          setTrackInfo={setTrackInfo}
+          setPage={setPage}
+          setCurrentTrack={setCurrentTrack}
         />
       }
     </div>

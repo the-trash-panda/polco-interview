@@ -1,44 +1,71 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
+import axios from 'axios';
 
 library.add(faHeart)
 
-const TrackInfo = ({ trackInfo }) => {
+const TrackInfo = ({ trackInfo, currentTrack, favorites, getFavorites }) => {
 
-  const [favorite, setFavorite] = useState('');
+  const [heart, setHeart] = useState(null);
+
+  useEffect(() => {
+    for (let i = 0; i < favorites.length; i++) {
+      if (favorites[i].artist === currentTrack.artist && favorites[i].track === currentTrack.track) {
+        const newHeart = favorites[i].favorite;
+        setHeart(newHeart);
+        break;
+      } else {
+        setHeart(false);
+      }
+    }
+  }, []);
+
+  const updateTrack = () => {
+    const params = {
+      ...currentTrack,
+      favorite: !heart
+    }
+    axios.put('/api/favorites', params)
+      .then((res) => { getFavorites(); })
+      .catch((err) => { console.error(err) })
+  };
+
 
   return (
     <div>
-      { trackInfo.track ?
-      <div>
-        <FontAwesomeIcon
-          icon="fas fa-heart"
-          color={favorite ? "red" : "black"}
-          onClick={(e) => {setFavorite(!favorite)}}
-        />
+      {trackInfo.track ?
         <div>
-          Artist: {trackInfo.track.artist.name}
-        </div>
-        <div>
-          Track: {trackInfo.track.name}
-        </div>
-        <div>
-          Album: {trackInfo.track.album ? trackInfo.track.album.title : 'Unavailable'}
-        </div>
-        <div>
-          Genre: {trackInfo.track.toptags.tag.map((genre, idx) => {
-            return (
-              <span key={idx}>{(idx ? ', ' : '') + genre.name}</span>
-            )
-          })}
-        </div>
-      </div > : <span>Loading</span>
-    }
+          <FontAwesomeIcon
+            icon="fas fa-heart"
+            color={heart ? "red" : "black"}
+            onClick={(e) => {
+              updateTrack();
+              setHeart(!heart);
+            }}
+          />
+          <div>
+            Artist: {trackInfo.track.artist.name}
+          </div>
+          <div>
+            Track: {trackInfo.track.name}
+          </div>
+          <div>
+            Album: {trackInfo.track.album ? trackInfo.track.album.title : 'Unavailable'}
+          </div>
+          <div>
+            Genre: {trackInfo.track.toptags.tag.map((genre, idx) => {
+              return (
+                <span key={idx}>{(idx ? ', ' : '') + genre.name}</span>
+              )
+            })}
+          </div>
+        </div > : <span>Loading</span>
+      }
     </div>
 
   )
-}
+};
 
 export default TrackInfo;

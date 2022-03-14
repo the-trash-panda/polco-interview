@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 
-const Track = ({ track, setPage, setCurrentTrack}) => {
+const Track = ({ track, setPage, setCurrentTrack }) => {
 
   return (
     <li
@@ -13,11 +12,9 @@ const Track = ({ track, setPage, setCurrentTrack}) => {
         setPage('trackInfo');
         setCurrentTrack(params);
       }}
-    >
-      {track.name} by {track.artist.name}
-
-    </li>
+    >{track.name} by {track.artist.name}</li>
   )
-}
+
+};
 
 export default Track;

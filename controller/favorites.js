@@ -10,4 +10,15 @@ const getFavorites = (req, res) => {
   })
 };
 
+const updateFavorites = (req, res) => {
+  model.updateFavorites(req, (err, results) => {
+    if (err) {
+      res.status(500);
+    } else {
+      res.send(results).status(200);
+    }
+  })
+};
+
 module.exports.getFavorites = getFavorites;
+module.exports.updateFavorites = updateFavorites;

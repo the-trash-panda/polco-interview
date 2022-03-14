@@ -1,7 +1,7 @@
 import React from 'react';
 import Track from './Track.jsx';
 
-const List = ({ topTracks, setPage, setCurrentTrack}) => {
+const List = ({ topTracks, setPage, setCurrentTrack }) => {
 
   return (
     <ul>
@@ -18,6 +18,7 @@ const List = ({ topTracks, setPage, setCurrentTrack}) => {
       }
     </ul>
   )
-}
+
+};
 
 export default List;

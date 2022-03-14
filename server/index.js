@@ -48,11 +48,15 @@ app.get('/api/trackInfo', async (req, res) => {
   } catch (err) {
     res.send(err).status(404);
   }
-})
+});
 
 app.get('/api/favorites', (req, res) => {
   controller.getFavorites(req, res);
-})
+});
+
+app.put('/api/favorites', (req, res) => {
+  controller.updateFavorites(req, res);
+});
 
 
 

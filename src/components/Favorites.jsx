@@ -1,20 +1,30 @@
 import React from 'react';
-import FavoriteTrack from './FavoriteTrack.jsx';
 
-const Favorites = ({ favorites }) => {
+const Favorites = ({ favorites, setTrackInfo, setPage, setCurrentTrack }) => {
+
   return (
     <ul>
-      {favorites.length > 0 ? favorites.filter((favorite) => favorite.favorite).map((favorite, idx) => {
-        return (
-          <FavoriteTrack
-            key={idx}
-            favorite={favorite}
-          />
-        )
-      }) : <span>Add more song to your favorites!</span>
+      {favorites.filter((favorite) => favorite.favorite).length > 0 ?
+        favorites.filter((favorite) => favorite.favorite).map((favorite, idx) => {
+          return (
+            <li
+              key={idx}
+              onClick={(e) => {
+                const params = {
+                  artist: favorite.artist,
+                  track: favorite.track
+                }
+                setTrackInfo('');
+                setPage('trackInfo');
+                setCurrentTrack(params);
+              }}
+            >{favorite.track} by {favorite.artist}</li>
+          )
+        }) : <span>Add more songs to your favorite!</span>
       }
     </ul>
   )
-}
+
+};
 
 export default Favorites;
