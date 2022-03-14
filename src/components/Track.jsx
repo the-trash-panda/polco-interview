@@ -4,6 +4,7 @@ const Track = ({ track, setPage, setCurrentTrack }) => {
 
   return (
     <li
+      className='track'
       onClick={(e) => {
         const params = {
           artist: track.artist.name,

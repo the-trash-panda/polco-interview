@@ -43,45 +43,54 @@ const App = () => {
 
 
   return (
-    <div>
-      <div>
+    <div className='container'>
+      <div className='headerContainer'>
         <h2
-          onClick={(e) => {
-            setPage('home');
-            setTrackInfo('');
-          }}
+          className='header'
         >LastFM's Top 50 Hits</h2>
-        <button
-          onClick={(e) => {
-            setPage('favorites');
-            getFavorites();
-          }}
-        >
-          Favorites
-        </button>
+        <div className='buttonContainer'>
+          <button
+            onClick={(e) => {
+              setPage('home');
+              setTrackInfo('');
+            }}
+          >
+            Main Page
+          </button>
+          <button
+            onClick={(e) => {
+              setPage('favorites');
+              getFavorites();
+            }}
+          >
+            Favorites
+          </button>
+        </div>
       </div>
-      {page === 'home' ?
-        <List
-          topTracks={topTracks}
-          currentTrack={currentTrack}
-          setPage={setPage}
-          setCurrentTrack={setCurrentTrack}
-        />
-        : page === 'trackInfo' ?
-        <TrackInfo
-          trackInfo={trackInfo}
-          currentTrack={currentTrack}
-          favorites={favorites}
-          getFavorites={getFavorites}
-        />
-        :
-        <Favorites
-          favorites={favorites}
-          setTrackInfo={setTrackInfo}
-          setPage={setPage}
-          setCurrentTrack={setCurrentTrack}
-        />
-      }
+      <div className='pageContainer'>
+        {page === 'home' ?
+          <List
+            topTracks={topTracks}
+            currentTrack={currentTrack}
+            setPage={setPage}
+            setCurrentTrack={setCurrentTrack}
+          />
+          : page === 'trackInfo' ?
+          <TrackInfo
+            trackInfo={trackInfo}
+            currentTrack={currentTrack}
+            favorites={favorites}
+            getFavorites={getFavorites}
+          />
+          :
+          <Favorites
+            favorites={favorites}
+            setTrackInfo={setTrackInfo}
+            setPage={setPage}
+            setCurrentTrack={setCurrentTrack}
+          />
+        }
+      </div>
     </div>
   )
 };

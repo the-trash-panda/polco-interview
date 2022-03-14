@@ -34,10 +34,11 @@ const TrackInfo = ({ trackInfo, currentTrack, favorites, getFavorites }) => {
 
 
   return (
-    <div>
+    <div className='trackInfoPage'>
       {trackInfo.track ?
-        <div>
+        <div className='trackInfoContainer'>
           <FontAwesomeIcon
+            className='heart'
             icon="fas fa-heart"
             color={heart ? "red" : "black"}
             onClick={(e) => {
@@ -45,16 +46,16 @@ const TrackInfo = ({ trackInfo, currentTrack, favorites, getFavorites }) => {
               setHeart(!heart);
             }}
           />
-          <div>
+          <div className='trackInfoTag'>
             Artist: {trackInfo.track.artist.name}
           </div>
-          <div>
+          <div className='trackInfoTag'>
             Track: {trackInfo.track.name}
           </div>
-          <div>
+          <div className='trackInfoTag'>
             Album: {trackInfo.track.album ? trackInfo.track.album.title : 'Unavailable'}
           </div>
-          <div>
+          <div className='trackInfoTag'>
             Genre: {trackInfo.track.toptags.tag.map((genre, idx) => {
               return (
                 <span key={idx}>{(idx ? ', ' : '') + genre.name}</span>

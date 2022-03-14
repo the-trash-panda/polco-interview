@@ -1,0 +1,113 @@
+#app {
+  font-family: 'Raleway', sans-serif;
+}
+
+button {
+  margin: 2vw;
+  cursor: pointer;
+  font-size: 2vh;
+  font-family: 'Raleway', sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: aliceblue;
+  margin: 0;
+}
+
+/*************
+*   Header   *
+*************/
+
+
+.headerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  margin-top: 5vh;
+}
+
+.header {
+  font-size: 3vh;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+
+/**********************
+*   Individual Page   *
+**********************/
+
+
+.pageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50vw;
+  height: 65vh;
+  background-color: white;
+  padding: 1vw;
+}
+
+/***************************
+*   Main Page & Favorites   *
+***************************/
+
+.pageIndividual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50vw;
+  height: 65vh;
+}
+
+.list {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  list-style: none;
+  overflow-y: scroll;
+  padding: 0;
+}
+
+.track {
+  margin-bottom: 1vw;
+  text-align: center;
+  cursor: pointer;
+}
+
+/**********************
+*   TrackInfo Page   *
+**********************/
+
+.trackInfoPage {
+  width: 100%;
+  height: 100%;
+}
+
+.trackInfoContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.5vw;
+  align-items: center;
+}
+
+.trackInfoTag {
+  margin-bottom: 1vw;
+}
+
+.heart {
+  margin-bottom: 1vw;
+  cursor: pointer;
+}
