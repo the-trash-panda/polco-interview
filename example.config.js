@@ -6,4 +6,4 @@ const lastFM = {
   API_KEY: 'YOUR_API_KEY_HERE'
 }
 
-export default lastFM;
+module.exports = lastFM;
